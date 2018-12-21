@@ -22,9 +22,9 @@ Build an OOP Hangman game from scratch.
 ## Strong Suggestions
 
 * Functionality to determine if a guess is good could go in `game` object ***or might best be split between `game` object and `Word` class*** (i.e. `getGuess()` in game and `checkLetter()` in `Word` (which might also update the data structure, and also call the function that causes the word to reprint itself)).
-    * hint: in addition to changing the Word properties, checkLetter could return true or false... how might this be useful?
+    * Hint: In addition to changing the Word properties, `checkLetter()` could return true or false... how might this be useful?
 
-* Avoid referencing the `game` object inside the `Word` class if possible; if something has to do with the game more so than the word, it should go in the game object. You want your `Word` class to be just `Word`-specific stuff. In general a class should be a totally standalone thing -- that you could even drop in and use in another application.
+* Avoid referencing the `game` object inside the `Word` class if possible; if something has to do with the game more so than the game, it should go in the `game object`. You want your `Word` class to be just word-specific stuff. In general a class should be a totally standalone thing—that you could even drop in and use in another application.
 
 * Event listers/handlers will call game object methods containing game play logic
 
