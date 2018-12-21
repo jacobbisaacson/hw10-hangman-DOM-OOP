@@ -15,7 +15,7 @@ Build an OOP Hangman game from scratch.
 * Letters must be guessed with keypresses
 * Track and inform user of guessed letters and letters remaining
 * You must be able to win or lose one round (either guess word correctly or die trying).
-* You must have a `game` object, a `Word` class, and event listeners.
+* You must have a `game` object, a `Word` class, and event listeners/handlers.
 * There must be no other code in the global scope, everything goes in either the `game` object, the Word class (or the `Letter` class if you decide to create one), or event listeners/handlers.
 * You must use either plain vanilla JavaScript or jQuery for all event handling and DOM manipulation, **but not both**.
 
@@ -24,11 +24,11 @@ Build an OOP Hangman game from scratch.
 * Functionality to determine if a guess is good could go in `game` object ***or might best be split between `game` object and `Word` class*** (i.e. `getGuess()` in game and `checkLetter()` in `Word` (which might also update the data structure, and also call the function that causes the word to reprint itself)).
     * Hint: In addition to changing the Word properties, `checkLetter()` could return true or false... how might this be useful?
 
-* Avoid referencing the `game` object inside the `Word` class if possible; if something has to do with the game more so than the game, it should go in the `game object`. You want your `Word` class to be just word-specific stuff. In general a class should be a totally standalone thing—that you could even drop in and use in another application.
+* Avoid referencing the `game` object inside the `Word` class if possible; if something has to do with the game more so than the game, it should go in the `game` object. You want your `Word` class to be just word-specific stuff. In general a class should be a totally standalone thing—that you could even drop in and use in another application.
 
-* Event listers/handlers will call game object methods containing game play logic
+* Event listers/handlers should call `game` object methods containing game play logic
 
-* Do NOT put game logic in listeners/handlers. Just have them call game methods. 
+* Do NOT put game logic (checking guesses, updating html, keeping score, etc) in listeners/handlers. Just have your listeners/handlers call `game` methods. 
 
 * You may or may not want a `Letter` class.
 
@@ -89,8 +89,11 @@ const game = {
 
 /* LISTENERS HERE */
 
+
+
 ```
 
+---
 
 ## Hungry for More
 
