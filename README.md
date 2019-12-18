@@ -55,10 +55,10 @@ Also, COMMIT COMMIT COMMIT COMMIT.  At a minimum, you should commit for each one
   * take a `character` as an argument, and
   * go through the array of letter objects and change the `guessed` boolean to true if the guessed letter matches that letter in the array (if the letters are instances of the `Letter` class, maybe `letter` should have a method `markGuessed` that does this), and
   * return `true` if the letter was found in the array, or return `false` otherwise. 
-  * Several commits would have been appropriate here.
+  * A few commits would have been appropriate as you did the above steps.
 
 * **Test your `checkLetter()` method.** Instantiate a few words, and call `checkLetter()` on them and:
-  * make sure the return value is `true` or `false` as appropriate
+  * make sure the return value is either `true` or `false` as appropriate
   * call `getWordString()` on them to make sure the words print correctly.
   * Commit when it works.
 
@@ -73,17 +73,19 @@ Think about how hangman works.  And take look at the guidelines in the assignmen
 
 > Track and inform user of guessed letters and guesses remaining
 
-* Any time you need to "track" data like this, that's application [**"state"** (check out the "Program State" section)](https://en.wikipedia.org/wiki/State_(computer_science)) data, (i.e. the state of your app at any given point).  You should create some properties in your main object to track this type of data, so add an empty `guessedLetters` array, and a `guessesRemaining` value (initial value of 7 or 8 as indicated in instructions).
+* Any time you need to "track" data like this, that's application [**"state"** (check out the "Program State" section)](https://en.wikipedia.org/wiki/State_(computer_science)) data, (i.e. the "state" of your app at any given point).  You should create some properties in your main object to track this type of data, so add an empty `guessedLetters` array, and a `guessesRemaining` value (initial value of 7 or 8 as indicated in instructions).
 
-* What other data do you need to "track" for one round of the game? How about your instantiated word?  What would be a good name for that property? How about `currentWord`. Don't try to set/instantiate the random word directly as the object property, just initialize that property to be `null`.
+* What other data do you need to "track" for one round of the game? How about your instantiated word?  What would be a good name for that property? How about `currentWord`. Don't try to set/instantiate the random word directly as the object property, just initialize that property to be `null` for the moment.  Commit maybe?
 
-* But when _will_ the word get initialized?  Well, when the round starts, right?  So let's add a method `startRound()` that gets a random word from your `wordBank` array, instantiates a `Word` with it, and stores that instance in that `game.currentWord` property (remember to use `this` when referring to the `game` object inside of methods on the `game` object!). Commit when it works.
+* But when _will_ the word get initialized?  Well, when the round starts, right?  So create a method `startRound()` that gets a random word from your `wordBank` array, instantiates a `Word` with it, and stores that instance in that `game.currentWord` property (remember to use `this` when referring to the `game` object inside of methods on the `game` object!). Commit when it works.
 
-* **Test your game so far.**  Put a call to `game.startRound()` in the global scope, and then type `game` in your console and check that a random word got instantiated.  Sweet!  You're committing right?  This would be a great time. 
+* **Test your game so far.**  Put a call to `game.startRound()` in the global scope, and then type `game` in your console and drill down and check that a random word got instantiated.  Sweet!  You're committing right?  This would be a great time. 
 
 * What else should happen when the round starts?  Think about playing hangman in real life.  We want the user to guess a letter, right?  But first, we should probably show them the blanks... that's usually how hangman works, right?
 
-* We're going to need to keep showing the word with its guessed/unguessed letters to the user, so maybe we should have a method in the game object that prints the word.  Let's call it `printWord()`.  It should use Vanilla JS or jQuery to print the word on the page, perhaps in some container you create in the html.  Pro tip: use CSS to style that container to have a fixed-width font like Courier or Courier New.
+* Seems like we're going to need to keep showing the word with its guessed/unguessed letters to the user over and over again, so maybe we should have a method in the game object that prints the word.  Let's call it `printWord()`.  It should use Vanilla JS or jQuery to print the word on the page, perhaps in some container you create in the html.  Pro tip: use CSS to style that container to have a fixed-width font like Courier or Courier New.  When it works, commit.  
+
+* _Ok we're going to stop telling you to commit all the time.  It's up to you to remember to commit frequently as you're building_.
 
 * Now, call the `printWord` method inside of `startRound` after you instantiate your `Word` class.
 
@@ -97,7 +99,7 @@ Alright!  Now you're ready to start thinking about guesses.
 
   * `currentWord.checkLetter()` will return `true` or `false` depending on whether the letter was there or not.  How can you use this information? 
   
-  * If the letter was there, then what should happen next? the user should get some feedback.  Your app should communicate to the user what is happening.  If the letter wasn't there, well we should communicate that to them too. 
+  * If the letter was there, then what should happen next? The user should get some feedback.  **_Your apps should ALWAYS clearly communicate to the user what is happening._**  If the letter wasn't there, well, we should communicate that to the user too. 
 
   * So we need a way to display a message to the user in multiple places in our app.  How about a game method called `displayMessage()` that takes a message string as a parameter and displays it in the DOM? 
 
@@ -111,14 +113,13 @@ Alright!  Now you're ready to start thinking about guesses.
 
       * It would also be nice to tell the user how many guesses they have left. And what letters they've guessed.  In fact, we're going to need to do this a lot of times.  Make a method `printStats()` in the `game` object that prints the `lettersGuessed` and the `guessesRemaining` on the page. 
 
-      * make `checkUserInput()` call that `printStats()` method after it checks a guess.  So now `checkUserInput()`
+      * make `checkUserInput()` call that `printStats()` method after it checks a guess.  So now `checkUserInput()` does the following:
         * checks the guess
         * tells the user what happened
-        * maybe adjusts guessesRemaining and lettersGuessed
-        * calls printStats()
-        * calls printWord
-
-      * Bonus: if they guess a letter they've already guessed, don't count it against them, instead just display a message saying: "you've already guessed that letter."
+        * maybe adjusts `guessesRemaining` and `lettersGuessed` or maybe not
+        * calls `printStats()`
+        * calls `printWord()`
+        * Bonus: if they guess a letter they've already guessed, don't count it against them, instead just display a message saying: "you've already guessed that letter."
 
   * Throughout this process, notice how we're keeping our logic that prints things on the page separate from our logic.  This [_**separation of concerns**_](https://en.wikipedia.org/wiki/Separation_of_concerns) is a critical concept in Computer Science and programming.
 
@@ -133,28 +134,32 @@ Alright!  Now you're ready to start thinking about guesses.
     Else 
         everything checkUserInput was already doing
     ```
+  * Also nice to include: it shouldn't care about case.  You can accomplish this by lowercasing the all the letters in your comparisons, and where you store the guessed letters.  Just lowercase everything.
+
 > You must be able to win or lose one round (either guess word correctly or die trying).
 
-* Phew!  You've basically got the game done now, you just need to figure out how this critical last step.  There are several different ways to pull this off, and if you've made it this far, you probably have a pretty good idea of how this should work.  Try to think through how to implement it!
+* Phew!  You've basically got the game done now, you just need to figure out how this critical last step.  There are several different ways to pull this off, and if you've made it this far, you probably have a pretty good idea of how this could work.  Try to think through how to implement it!
 
-<details>
-  <summary>Hints -- only look if you've been stuck on win condition for a while</summary>
+  <details>
+    <summary>Hints -- only look if you've been stuck on win condition for a while</summary>
 
-  * add an `isCompletelyGuessed()` method to the `Word` class that returns `true` if all the letters are correctly guessed, or false otherwise
+    * add an `isCompletelyGuessed()` method to the `Word` class that returns `true` if all the letters are correctly guessed, or false otherwise
 
-  * use it with some conditionals in the `checkUserInput()` 
+    * use it with some conditionals in the `checkUserInput()` method
 
-</details>
+  </details>
 
 
+### That's a hangman MVP!  Nice! 
 
 
 ---
 
 ## Hungry for More
 
-* Keep track of Rounds won and lost. 
+* Have the game able to play multiple rounds.  After one round, prompt the user to play again.  If they accept, it should reset everything, pick a new word, and keep track of rounds won and lost. 
 
 * Slice up an image of a little man and have his parts appear like a traditional hangman game!
 
 * Research Canvas [here](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and [here](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) and make the little man be done using Canvas graphics
+
