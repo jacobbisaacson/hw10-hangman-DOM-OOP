@@ -2,11 +2,7 @@
 
 # Hangman OOP Game
 
-## Setup.
-
-Fork this repo and clone your fork. Make sure you're doing all the work in your fork. If you did it wrong, delete it and do it right.
-
-## Assignment:
+## Assignment
 
 Build an OOP Hangman game from scratch.
 
@@ -144,7 +140,7 @@ Alright!  Now you're ready to start thinking about guesses.
 <details>
   <summary>Hints -- only look if you've been stuck on win condition for a while</summary>
 
-  * add a `wordCompletelyGuessed()` method to the `Word` class that returns true if all the letters are correctly guessed
+  * add an `isCompletelyGuessed()` method to the `Word` class that returns `true` if all the letters are correctly guessed, or false otherwise
 
   * use it with some conditionals in the `checkUserInput()` 
 
