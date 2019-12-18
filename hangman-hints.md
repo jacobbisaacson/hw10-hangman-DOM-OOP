@@ -1,70 +1,30 @@
-![GA Logo](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
+## Guidance
 
-# Hangman OOP Game
+Here's a sensible approach you might use to build this.  At a minimum, you should commit for each one of these steps, but several of them might be multiple commits. 
 
-## Setup.
-
-Fork this repo and clone your fork. Make sure you're doing all the work in your fork. If you did it wrong, delete it and do it right.
-
-## Assignment:
-
-Build an OOP Hangman game from scratch.
-
-## Requirements
-
-* Letters must be guessed with keypresses
-* Track and inform user of guessed letters and guesses remaining
-* User loses after 7 or 8 guesses
-* You must be able to win or lose one round (either guess word correctly or die trying).
-* You must have a `game` object, a `Word` class, and event listeners/handlers.
-* There must be no other code in the global scope, everything goes in either the `game` object, the Word class (or the `Letter` class if you decide to create one), or event listeners/handlers.
-* Declare your array (`wordBank`) of possible words in a separate file, linked up in the html _before_ the main `app.js` file.  
-* You may use _either_ plain vanilla JavaScript or jQuery for all event handling and DOM manipulation, **but not both**.
-
-## Strong Suggestions
-
-* Functionality to determine if a guess is valid could go in `game` object ***or might best be split between `game` object and `Word` class*** (i.e. `getUserInput()` in game and `checkLetter()` in `Word` (which might also update the data structure, and also call the function that causes the word to reprint itself)).
-  * Hint: In addition to changing the Word properties, `checkLetter()` could return true or false... how might this be useful?
-
-* Avoid referencing the `game` object inside the `Word` class if possible; if something has to do with the game more so than the game, it should go in the `game` object. You want your `Word` class to be just word-specific stuff. In general a class should be a totally standalone thing—that you could even drop in and use in another application.
-
-* Event listers/handlers should call `game` object methods containing game play logic. 
-
-* Do NOT put game logic (checking guesses, updating html, keeping score, etc) in listeners/handlers. Just have your listeners/handlers get info from the user, and call `game` methods and pass that info into them.
-
-* You may or may not want a `Letter` class.
-
-
-## Guidance..
-
-Here's a sensible approach you might use to build this.  We are steering you towards object-oriented app design.  
-
-Also, COMMIT COMMIT COMMIT COMMIT.  At a minimum, you should commit for each one of these steps, but several of them might be multiple commits. 
 
 ## `Word`
 
-* Create a `Word` class.  When a round of the game starts, we will instantiate this and store it in the `game` object. 
+* Create a `Word` class.  When a round of the game starts, we will instantiate this and store it in the `game` object.
 
 * The `constructor()` should take a word (string) as an argument.
 
 * Inside the constructor, use the word to create an array of objects.  Each object will correspond to a letter.  Each object will have 2 properties: `character`, which is the letter, and `guessed` which is a boolean that indicates whether the letter has been guessed or not.  You could optionally create a `Letter` class and make these objects instances of that. 
 
-* **Test your `Word` class.** Instantiate a `Word` a few times.  Print the instantiated word in the console and drill down into the object and make sure it instantiates correctly.  Commit when it works.
+* **Test your `Word` class.** Instantiate a `Word` a few times.  Print the instantiated word in the console and drill down into the object and make sure it instantiates correctly.
 
-* Add a method `getWordString()` to the `Word` class.  It should **return** a string corresponding to the word in its current state.  If a letter has been guessed, it should print that letter.  If not, it should print a `_` character.  Be sure to put a space between each character in the returned string so you can see the individual blanks for the unguessed letters. Commit when it works.
+* Add a method `getWordString()` to the `Word` class.  It should **return** a string corresponding to the word in its current state.  If a letter has been guessed, it should print that letter.  If not, it should print a `_` character.  Be sure to put a space between each character in the returned string so you can see the individual blanks for the unguessed letters.
 
-* **Test your `getWordString()` method.** Instantiate a few words and call `getWordString()` on them, making sure you get the correct number of `_`s. Manually change some of the letters' `guessed` to `true` and make sure that causes the letters to show up in the returned string. Commit when it works.
+* **Test your `getWordString()` method.** Instantiate a few words and call `getWordString()` on them, making sure you get the correct number of `_`s. Manually change some of the letters' `guessed` to `true` and make sure that causes the letters to show up in the returned string.
 
 * Add a method `checkLetter()` to your `Word` class.  It should:
   * take a `character` as an argument, and
   * go through the array of letter objects and change the `guessed` boolean to true if the guessed letter matches that letter in the array (if the letters are instances of the `Letter` class, maybe `letter` should have a method `markGuessed` that does this), and
   * return `true` if the letter was found in the array, or return `false` otherwise. 
-  * Several commits would have been appropriate here.
 
 * **Test your `checkLetter()` method.** Instantiate a few words, and call `checkLetter()` on them and:
   * make sure the return value is `true` or `false` as appropriate
   * call `getWordString()` on them to make sure the words print correctly.
-  * Commit when it works.
 
 Now, you've got a `Word` class (and maybe also a `Letter` class) that could be used in _any_ hangman game.  That's a great thing—you're being modular!  You want to make each part (class or function) of your code as reusable as possible. 
 
@@ -81,7 +41,7 @@ Think about how hangman works.  And take look at the guidelines in the assignmen
 
 * What other data do you need to "track" for one round of the game? How about your instantiated word?  What would be a good name for that property? How about `currentWord`. Don't try to set/instantiate the random word directly as the object property, just initialize that property to be `null`.
 
-* But when _will_ the word get initialized?  Well, when the round starts, right?  So let's add a method `startRound()` that gets a random word from your `wordBank` array, instantiates a `Word` with it, and stores that instance in that `game.currentWord` property (remember to use `this` when referring to the `game` object inside of methods on the `game` object!). Commit when it works.
+* But when _will_ the word get initialized?  Well, when the round starts, right?  So let's add a method `startRound()` that gets a random word from your `wordBank` array, instantiates a `Word` with it, and stores that instance in that `game.currentWord` property (remember to use `this` when referring to the `game` object inside of methods on the `game` object!)
 
 * **Test your game so far.**  Put a call to `game.startRound()` in the global scope, and then type `game` in your console and check that a random word got instantiated.  Sweet!  You're committing right?  This would be a great time. 
 
@@ -130,13 +90,8 @@ Alright!  Now you're ready to start thinking about guesses.
     * figures out what key was pressed
     * calls `game.checkUserInput()` and passes in the key pressed
 
-  * Optional, but nice to include: figure out if the key pressed was a letter.  Use google to see how to figure out if a pressed key is a letter. Once you've got it, then in `checkUserInput()`, have logic like this pseudocode: 
-    ```
-    If it wasn't a keypress
-        tell the user 
-    Else 
-        everything checkUserInput was already doing
-    ```
+  * Optional, but nice to include: figure out if the key pressed was a letter.  If 
+
 > You must be able to win or lose one round (either guess word correctly or die trying).
 
 * Phew!  You've basically got the game done now, you just need to figure out how this critical last step.  There are several different ways to pull this off, and if you've made it this far, you probably have a pretty good idea of how this should work.  Try to think through how to implement it!
@@ -151,14 +106,3 @@ Alright!  Now you're ready to start thinking about guesses.
 </details>
 
 
-
-
----
-
-## Hungry for More
-
-* Keep track of Rounds won and lost. 
-
-* Slice up an image of a little man and have his parts appear like a traditional hangman game!
-
-* Research Canvas [here](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and [here](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) and make the little man be done using Canvas graphics
