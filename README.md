@@ -2,6 +2,10 @@
 
 # Hangman OOP Game
 
+## Setup
+
+Fork this repo and clone your fork. Make sure you're doing all the work in your fork. If you did it wrong, delete it and do it right.
+
 ## Assignment
 
 Build an OOP Hangman game from scratch.
