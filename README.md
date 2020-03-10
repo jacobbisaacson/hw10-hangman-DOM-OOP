@@ -7,7 +7,7 @@
 * You must be able to win or lose one round (either guess word correctly or die trying).
 * You must have a `game` object, a `Word` class, and event listeners/handlers.
 * There must be no other code in the global scope, everything goes in either the `game` object, 
-*  the Word class (or the `Letter` class if you decide to create one), or event listeners/handlers.
+* or the Word class (or the `Letter` class if you decide to create one), or event listeners/handlers.
 * Declare your array (`wordBank`) of possible words in a separate file, linked up in the html _before_ the main `app.js` file.  
 * You may use _either_ plain vanilla JavaScript or jQuery for all event handling and DOM manipulation, **but not both**.
 

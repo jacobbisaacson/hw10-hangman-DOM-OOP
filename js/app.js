@@ -1,44 +1,49 @@
 console.log("hangman");
 
 class Letter {
-	constructor(ltrInStr){
-		this.character = ltrInStr
+	constructor(character) {
 		this.guessed = false
+		this.character = character
+
 	}
 }
 
-const ltrA = new Letter("a")
-console.log(ltrA);
+class Word {
+	constructor(str) {
+		this.letters = []
 
-const word = "dog"
-let ltrsArr = []
+		for(let i = 0; i < str.length; i++) {
+			let ltrFromStr = new Letter(str[i])
+			this.letters.push(ltrFromStr)
+		}
+	}
+	getWordString() {
 
-for(let i = 0; i < word.length; i++) {
-	let ltrFromStr = new Letter(word[i])
-	ltrsArr.push(ltrFromStr)
+		let str = ""
+		for(let i = 0; i < this.letters.length; i++) {
+			if(this.letters[i].guessed === false){
+				str += " _"
+			} else {
+				str += " "
+				str += this.letters[i].character
+			}
+			
+		}
+		console.log(str);
+
+	}
+
 }
 
-console.log(ltrsArr);
 
+taco = new Word("taco")
+burrito = new Word("burrito")
+torta = new Word("torta")
 
-
-// const app = {
-
-// 	array: [],
-
-// 	gatherUserInput: function() {
-
-// 	}
-
-
-// }
-
-
-
-
-
-
-
+taco.letters[0].guessed = true
+taco.letters[2].guessed = true
+taco.getWordString()
+burrito.getWordString()
 // --------------------------------------------------------
 
 // 1. EVENT LISTENER -- 
