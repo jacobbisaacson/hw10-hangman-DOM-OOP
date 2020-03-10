@@ -1,31 +1,39 @@
 console.log("hangman");
 
-class ToDo {
-
-	constructor(str) {
-	this.letter = letter
-	this.word = word
-	this.missedLetter = missedLetter
-
-	}
-
-	checkLetter() {
-    this.checkLetter = true
-	
+class Letter {
+	constructor(ltrInStr){
+		this.character = ltrInStr
+		this.guessed = false
 	}
 }
 
-const app = {
+const ltrA = new Letter("a")
+console.log(ltrA);
 
-	array: [],
+const word = "dog"
+let ltrsArr = []
 
-	gatherUserInput: function() {
-
-	}
-
-
-
+for(let i = 0; i < word.length; i++) {
+	let ltrFromStr = new Letter(word[i])
+	ltrsArr.push(ltrFromStr)
 }
+
+console.log(ltrsArr);
+
+
+
+// const app = {
+
+// 	array: [],
+
+// 	gatherUserInput: function() {
+
+// 	}
+
+
+// }
+
+
 
 
 
