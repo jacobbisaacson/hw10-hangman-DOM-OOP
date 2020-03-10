@@ -1,14 +1,3 @@
-![GA Logo](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
-
-# Hangman OOP Game
-
-## Setup
-
-Fork this repo and clone your fork. Make sure you're doing all the work in your fork. If you did it wrong, delete it and do it right.
-
-## Assignment
-
-Build an OOP Hangman game from scratch.
 
 ## Requirements
 
@@ -17,7 +6,8 @@ Build an OOP Hangman game from scratch.
 * User loses after 7 or 8 guesses
 * You must be able to win or lose one round (either guess word correctly or die trying).
 * You must have a `game` object, a `Word` class, and event listeners/handlers.
-* There must be no other code in the global scope, everything goes in either the `game` object, the Word class (or the `Letter` class if you decide to create one), or event listeners/handlers.
+* There must be no other code in the global scope, everything goes in either the `game` object, 
+*  the Word class (or the `Letter` class if you decide to create one), or event listeners/handlers.
 * Declare your array (`wordBank`) of possible words in a separate file, linked up in the html _before_ the main `app.js` file.  
 * You may use _either_ plain vanilla JavaScript or jQuery for all event handling and DOM manipulation, **but not both**.
 
