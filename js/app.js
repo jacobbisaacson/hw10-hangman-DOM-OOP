@@ -71,10 +71,33 @@ class Word {
 
 		printWord() {
 			const words = document.querySelector(".word")
-			words.innerHTML = `<ul>${currentW.getWordString()}</ul>`
+			words.innerHTML = `<ul>${this.currentW.getWordString()}</ul>`
 			console.log(this.currentW.getWordString());
-		}
+		},
+
+		checkUserInput(letter) {
+			const check = this.currentW.checkLetter(letter)
+			if(this.correctGuess === true) {
+				this.printWord()
+				this.correctGuess = false
+			} else {
+				this.guessesRemaining --
+				this.lettersGuessed.push(letter)
+				this.printWord()
+			}
+		},
+
+		
 	}
+
+
+		document.addEventListener("keydown", (event) => {
+		console.log(game.currentW.getWordString());
+		game.checkUserInput(event.key)
+	})
+
+
+
 
 taco = new Word("taco")
 burrito = new Word("burrito")
