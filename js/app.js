@@ -10,39 +10,39 @@ class Letter {
 }
 class Word {
     constructor(str) {
-        this.str = str
+        // this.str = str
         this.letters = []
         for (let i = 0; i < str.length; i++) {
-            let ltrFromStr = new Letter(str[i])
-            this.letters.push(ltrFromStr)
+            // let ltrFromStr = new Letter(str[i])
+            this.letters.push(new Letter)
         }
     }
 
     getWordString() {
 
-        let str = ""
+        let string = ""
         for (let i = 0; i < this.letters.length; i++) {
-            if (this.letters[i].guessed === false) {
-                str += " _"
+            if (this.letters[i].guessed === true) {
+                string += this.letters[i].character
             } else {
-                str += " "
-                str += this.letters[i].character
+                string += " __"
+                // str += this.letters[i].character
             }
         }
-        console.log(str + "this is get word string");
-        return str
+        return string
+        console.log(str + " this is get word string");
     }
-    checkLetter(char) {
+    checkLetter(character) {
         for (let i = 0; i < this.letters.length; i++) {
-            if (char === this.letters[i].char) {
+            if (character === this.letters[i].character) {
                 this.letters[i].markGuessed()
                 game.correctGuess = true
             }
-
         }
-        console.log(char + "this is check letter");
+        console.log("this should check letter");
     }
 }
+
 const game = {
     lettersGuessed: [],
     guessesRemaining: 8,
@@ -50,41 +50,75 @@ const game = {
     currentW: null,
 
     start(wordbank) {
-        let randomW
-        for (let i = 0; i < wordBank.length; i++) {
-            randomI = Math.floor(Math.random() * wordBank.length)
-            randomW = wordBank[randomI]
-        }
-        this.currentW = new Word(randomW)
-        this.printWord()
-        // console.log(game.currentW);
-        // game.start() -- consoled a bunch of times gets me a random word for the word bank
+    	const randomW = wordBank[Math.floor(Math.random() * wordBank.length)]
+    	this.currentW = new Word(randomW)
+    	console.log(randomW);
+    	game.printWord()
+    	game.checkUserInput()
+
+        // let randomW
+        // for (let i = 0; i < wordBank.length; i++) {
+        //     randomI = Math.floor(Math.random() * wordBank.length)
+        //     randomW = wordBank[randomI]
+        // }
+        // this.currentW = new Word(randomW)
+        // this.printWord()
+        // // console.log(game.currentW);
+        // // game.start() -- consoled a bunch of times gets me a random word for the word bank
 
     },
 
     printWord() {
-        const words = document.querySelector(".word")
-        words.innerHTML = `<ul>${this.currentW.getWordString()}</ul>`
-        game.checkKeyPress()
+        const words = document.querySelector("#word")
+        words.innerHTML = `${this.currentW.getWordString()}`
+        // game.checkUserInput()
         // console.log(this.currentW.getWordString());
     },
 
-    checkKeyPress(key) {
-        const yes = this.currentW.checkLetter(key)
-        if (this.correctGuess === true) {
-            this.correctGuess = false
+    checkUserInput(letter) {
+        this.currentW.checkLetter(letter)
+
+        if(this.correctGuess === true) {
+        	this.displayMessage('good guess!')
+        	this.printWord()
+        	this.correctGuess = false
         } else {
-            this.guessesRemaining--
-            this.lettersGuessed.push(key)
-            this.printWord()
+        	this.guessesRemaining--
+        	this.displayMessage('nope! guess again!')
+        	this.lettersGuessed.push(letter)
         }
+
+        this.printStatus()
+        this.checkGameStatus()
+
     },
 
+    displayMessage(str) {
+    	const displayMessage = document.querySelector('#display-message')
+    	displayMessage.innerHTML = `${str}`
+    },
+
+    printStatus() {
+    	const printStatus = document.querySelector('#print-status')
+    	printStatus.innerHTML = `${this.guessesRemaining}' chances left!`
+    },
+
+    checkGameStatus(character) {
+    	if(this.currentW.letters === this.currentW.getWordString()) {
+    		this.displayMessage("you win!")
+    		return
+    	} else
+    	if(this.guessesRemaining = 0) {
+    		this.displayMessage("sorry, try again!")
+    		return
+    	}
+    }
 
 }
 
 document.addEventListener("keydown", (event) => {
-    game.printWord(event.key)
+    game.checkUserInput(event.target)
+
 })
 
 game.start()
