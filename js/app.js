@@ -24,7 +24,6 @@ class Word {
 		}
 
 		getWordString() {
-
 			let str = ""
 			for(let i = 0; i < this.letters.length; i++) {
 				if(this.letters[i].guessed === false){
@@ -64,10 +63,16 @@ class Word {
 				randomW = wordBank[randomI]
 			}
 			this.currentW = new Word(randomW)
-			// this.printWord()
+			this.printWord()
 			console.log(game.currentW);
 			// game.start() -- consoled a bunch of times gets me a random word for the word bank
 
+		},
+
+		printWord() {
+			const words = document.querySelector(".word")
+			words.innerHTML = `<ul>${currentW.getWordString()}</ul>`
+			console.log(this.currentW.getWordString());
 		}
 	}
 
