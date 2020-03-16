@@ -71,13 +71,19 @@ class Word {
 
 		checkKeyPress(key) {
 			const yes = this.currentW.checkLetter(key)
-			if(this.correctGuess === false) {
-				this.correctGuess = true
+			if(this.correctGuess === true) {
+				this.correctGuess = false
 			} else {
 				this.guessesRemaining--
 				this.lettersGuessed.push(key)
+				this.printWord()
 			}
-		}
+		},
+
+		// displayMessage(message) {
+		// 	const displayMessage = document.querySelector("#display-message")
+		// 	displayMessage.innerHTML = `<ul>${message}</ul>`
+		// },
 
 	}
 
