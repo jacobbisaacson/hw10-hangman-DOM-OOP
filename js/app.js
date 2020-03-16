@@ -14,7 +14,7 @@ class Word {
         this.letters = []
         for (let i = 0; i < str.length; i++) {
             // let ltrFromStr = new Letter(str[i])
-            this.letters.push(new Letter)
+            this.letters.push(new Letter(str[i]))
         }
     }
 
@@ -45,7 +45,7 @@ class Word {
 
 const game = {
     lettersGuessed: [],
-    guessesRemaining: 8,
+    guessesRemaining: 7,
     correctGuess: false,
     currentW: null,
 
@@ -108,7 +108,7 @@ const game = {
     		this.displayMessage("you win!")
     		return
     	} else
-    	if(this.guessesRemaining = 0) {
+    	if(this.guessesRemaining <= 0) {
     		this.displayMessage("sorry, try again!")
     		return
     	}
@@ -117,11 +117,10 @@ const game = {
 }
 
 document.addEventListener("keydown", (event) => {
-    game.checkUserInput(event.target)
+    game.checkUserInput(event.key)
 
 })
 
-game.start()
 
 
 
