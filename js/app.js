@@ -26,7 +26,7 @@ class Word {
                 string += this.letters[i].character
             } else {
                 string += " __"
-                // str += this.letters[i].character
+                // string += this.letters[i].character
             }
         }
         return string
@@ -101,20 +101,28 @@ const game = {
     printStatus() {
     	const printStatus = document.querySelector('#print-status')
     	printStatus.innerHTML = `${this.guessesRemaining}' chances left!`
+
     },
 
     checkGameStatus(character) {
-    	if(this.currentW.letters === this.currentW.getWordString()) {
-    		this.displayMessage("you win!")
-    		return
-    	} else
-    	if(this.guessesRemaining <= 0) {
-    		this.displayMessage("sorry, try again!")
-    		return
+    	if(this.currentW.markGuessed === true) {
+    		this.displayMessage('you win!')
     	}
+
+    	// if(this.currentW.letters === this.currentW.getWordString()) {
+    	// 	this.displayMessage("you win!")
+    	// 	return
+    	// } else
+    	// if(this.guessesRemaining <= 0) {
+    	// 	this.displayMessage("sorry, try again!")
+    	// 	return
+    	// }
     }
 
 }
+
+game.start()
+console.log(game.currentW);
 
 document.addEventListener("keydown", (event) => {
     game.checkUserInput(event.key)
