@@ -80,10 +80,6 @@ class Word {
 			}
 		},
 
-		// displayMessage(message) {
-		// 	const displayMessage = document.querySelector("#display-message")
-		// 	displayMessage.innerHTML = `<ul>${message}</ul>`
-		// },
 
 	}
 
