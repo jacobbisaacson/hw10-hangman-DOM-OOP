@@ -34,8 +34,9 @@ class Word {
 		}
 		checkLetter(char) {
 			for(let i = 0; i < this.letters.length; i++) {
-				if(this.letters[i].guessed === true ) {
+				if(char === this.letters[i].char) {
 					this.letters[i].markGuessed()
+					game.correctGuess = true
 				}
 			
 			}
@@ -64,8 +65,19 @@ class Word {
 		printWord() {
 			const words = document.querySelector(".word")
 			words.innerHTML = `<ul>${this.currentW.getWordString()}</ul>`
+			game.checkKeyPress()
 			// console.log(this.currentW.getWordString());
 		},
+
+		checkKeyPress(key) {
+			const yes = this.currentW.checkLetter(key)
+			if(this.correctGuess === false) {
+				this.correctGuess = true
+			} else {
+				this.guessesRemaining--
+				this.lettersGuessed.push(key)
+			}
+		}
 
 	}
 
