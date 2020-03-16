@@ -14,7 +14,7 @@ class Letter {
 
 class Word {
 		constructor(str) {
-
+			this.str = str
 			this.letters = []
 
 			for(let i = 0; i < str.length; i++) {
@@ -35,7 +35,8 @@ class Word {
 				}
 
 			}
-			console.log(str);
+			console.log(str + "this is get word string");
+			return str
 		}
 
 		checkLetter(char) {
@@ -45,9 +46,29 @@ class Word {
 				}
 			
 			}
-		console.log(char);
+		console.log(char + "this is check letter");
 		}
 
+	}
+
+
+	const game = {
+		lettersGuessed: [],
+		guessesRemaining: 8,
+		correctGuess: false,
+		currentW: "",
+
+		start(wordbank) {
+			for(let i = 0; i < wordBank.length; i++) {
+				randomI = Math.floor(Math.random() * wordBank.length)
+				randomW = wordBank[randomI]
+			}
+			this.currentW = new Word(randomW)
+			// this.printWord()
+			console.log(game.currentW);
+			// game.start() -- consoled a bunch of times gets me a random word for the word bank
+
+		}
 	}
 
 taco = new Word("taco")
