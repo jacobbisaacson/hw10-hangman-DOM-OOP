@@ -1,5 +1,5 @@
 console.log("hangman");
-class Letter { 
+class Letter {
     constructor(character) {
         this.guessed = false
         this.character = character
@@ -50,11 +50,11 @@ const game = {
     gameWon: null,
 
     start(wordbank) {
-    	const randomW = wordBank[Math.floor(Math.random() * wordBank.length)]
-    	this.currentW = new Word(randomW)
-    	console.log(randomW);
-    	game.printWord()
-    	game.checkUserInput()
+        const randomW = wordBank[Math.floor(Math.random() * wordBank.length)]
+        this.currentW = new Word(randomW)
+        console.log(randomW);
+        game.printWord()
+        game.checkUserInput()
         this.displayMessage('have fun!')
 
         // let randomW
@@ -79,14 +79,14 @@ const game = {
     checkUserInput(letter) {
         this.currentW.checkLetter(letter)
 
-        if(this.correctGuess === true) {
-        	this.displayMessage('good guess!')
-        	this.printWord()
-        	this.correctGuess = false
+        if (this.correctGuess === true) {
+            this.displayMessage('good guess!')
+            this.printWord()
+            this.correctGuess = false
         } else {
-        	this.guessesRemaining--
-        	this.displayMessage('nope! guess again!')
-        	this.lettersGuessed.push(letter)
+            this.guessesRemaining--
+            this.displayMessage('nope! guess again!')
+            this.lettersGuessed.push(letter)
         }
 
         this.printStatus()
@@ -95,43 +95,56 @@ const game = {
     },
 
     displayMessage(str) {
-    	const displayMessage = document.querySelector('#display-message')
-    	displayMessage.innerHTML = `${str}`
+        const displayMessage = document.querySelector('#display-message')
+        displayMessage.innerHTML = `${str}`
     },
 
     printStatus() {
-    	const printStatus = document.querySelector('#print-status')
-    	printStatus.innerHTML = `${this.guessesRemaining}' chances left!`
+        const printStatus = document.querySelector('#print-status')
+        printStatus.innerHTML = `${this.guessesRemaining}' chances left!`
+        this.checkGameStatus()
 
     },
-    winGame() {
-        if(this.guessesRemaining >= 0)
-            this.gameWon = true
-    },
+    // winGame() {
+    //     if (this.guessesRemaining >= 0)
+    //         this.gameWon = true
+    // },
     checkGameStatus(character) {
-        if(this.guessesRemaining <= 0) {
-            // console.log("you lose");
+        if (this.guessesRemaining <= 0) {
+            console.log("you lose");
             this.displayMessage("sorry, you lose!")
-        } else {
-            if(this.guessesRemaining > 0 && this.currentW.letters === this.currentW.getWordString) {
-                console.log("getting winner");
-                this.displayMessage("yay!")
-            }
+            return
+        } else if (this.guessesRemaining > 0 && this.correctGuess === true) {
+            console.log("you win"); // cant get this!
+            return
         }
+        // } > 0 && this.currentW.letters === this.currentW.getWordString) {
+        //         console.log("getting winner");
+        //         this.displayMessage("yay!")
+        //     }
+        // }
 
-    	// if(this.currentW.markGuessed === true) {
-    	// 	this.displayMessage('you win!')
-    	// }
+
+        // Here think about how you could check for a win here. You have the string on the game. 
+        // Think of a way to know if each letter is guessed. After each guess think of how you can 
+        // check if all of the letters in the word have been guessed or not.
 
 
-    	// if(this.currentW.letters === this.currentW.getWordString()) {
-    	// 	this.displayMessage("you win!")
-    	// 	return
-    	// } else
-    	// if(this.guessesRemaining <= 0) {
-    	// 	this.displayMessage("sorry, try again!")
-    	// 	return
-    	// }
+
+
+        // if(this.currentW.markGuessed === true) {
+        //  this.displayMessage('you win!')
+        // }
+
+
+        // if(this.currentW.letters === this.currentW.getWordString()) {
+        //  this.displayMessage("you win!")
+        //  return
+        // } else
+        // if(this.guessesRemaining <= 0) {
+        //  this.displayMessage("sorry, try again!")
+        //  return
+        // }
     }
 
 }
@@ -143,7 +156,6 @@ document.addEventListener("keydown", (event) => {
     game.checkUserInput(event.key)
 
 })
-
 
 
 
