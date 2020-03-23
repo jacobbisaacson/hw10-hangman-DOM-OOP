@@ -7,5 +7,7 @@ const wordBank = [
 	'something',
 	'anotherthing',
 	'wut',
-	'things'
+	'things',
+	'erin',
+	'thisisareallylongwordwithlotsoflettersinit'
 ]

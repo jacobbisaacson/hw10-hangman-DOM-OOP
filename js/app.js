@@ -1,5 +1,5 @@
 console.log("hangman");
-class Letter {
+class Letter { 
     constructor(character) {
         this.guessed = false
         this.character = character
@@ -19,7 +19,6 @@ class Word {
     }
 
     getWordString() {
-
         let string = ""
         for (let i = 0; i < this.letters.length; i++) {
             if (this.letters[i].guessed === true) {
@@ -39,7 +38,7 @@ class Word {
                 game.correctGuess = true
             }
         }
-        console.log("this should check letter");
+        // console.log("this should check letter");
     }
 }
 
@@ -48,6 +47,7 @@ const game = {
     guessesRemaining: 7,
     correctGuess: false,
     currentW: null,
+    gameWon: null,
 
     start(wordbank) {
     	const randomW = wordBank[Math.floor(Math.random() * wordBank.length)]
@@ -55,6 +55,7 @@ const game = {
     	console.log(randomW);
     	game.printWord()
     	game.checkUserInput()
+        this.displayMessage('have fun!')
 
         // let randomW
         // for (let i = 0; i < wordBank.length; i++) {
@@ -103,11 +104,25 @@ const game = {
     	printStatus.innerHTML = `${this.guessesRemaining}' chances left!`
 
     },
-
+    winGame() {
+        if(this.guessesRemaining >= 0)
+            this.gameWon = true
+    },
     checkGameStatus(character) {
-    	if(this.currentW.markGuessed === true) {
-    		this.displayMessage('you win!')
-    	}
+        if(this.guessesRemaining <= 0) {
+            // console.log("you lose");
+            this.displayMessage("sorry, you lose!")
+        } else {
+            if(this.guessesRemaining > 0 && this.currentW.letters === this.currentW.getWordString) {
+                console.log("getting winner");
+                this.displayMessage("yay!")
+            }
+        }
+
+    	// if(this.currentW.markGuessed === true) {
+    	// 	this.displayMessage('you win!')
+    	// }
+
 
     	// if(this.currentW.letters === this.currentW.getWordString()) {
     	// 	this.displayMessage("you win!")
